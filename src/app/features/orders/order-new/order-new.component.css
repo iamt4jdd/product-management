@@ -1,0 +1,15 @@
+.size-width{
+    width: 30%;
+    margin-right: 30px;
+}
+.icon-display {
+    transform: scale(0.8);
+ }
+
+ .stage-lable{
+    margin: 10px;
+ }
+
+ .mat-flat-button{
+    margin: 10px;
+ }

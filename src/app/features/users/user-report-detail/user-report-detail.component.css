@@ -1,0 +1,16 @@
+table {
+    width: 100%;
+}
+.mat-form-field {
+    margin-right: 12px;
+}
+.button-filter{
+    margin-left: 2rem;
+    height: 2.3rem;
+}
+.title{
+margin-left: 2rem;
+}
+.example-full-width{
+    width: 5rem;
+}

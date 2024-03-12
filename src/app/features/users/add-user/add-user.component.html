@@ -1,0 +1,60 @@
+<form class="add-form">
+  <h1>Thêm nhân viên</h1>
+  <div class="input-form">
+    <mat-form-field class="input-field">
+      <mat-label>Họ và tên</mat-label>
+      <input [(ngModel)]="fullName" name="fullname" matInput required id="name" #nameNg="ngModel">
+      <mat-error *ngIf="nameNg.errors?.['required']">
+        Họ và tên
+        <strong>không để trống</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="input-field">
+      <mat-label>Tài khoản</mat-label>
+      <input [(ngModel)]="userName" name="user-name" matInput required id="username" #userNameNg="ngModel">
+      <mat-error *ngIf="userNameNg.errors?.['required']">
+        Tài khoản
+        <strong>không để trống</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="input-field">
+      <mat-label>Mật khẩu</mat-label>
+      <input [(ngModel)]="password" name="password" matInput type="password" required #passwordNg ="ngModel">
+      <mat-error *ngIf="passwordNg.errors?.['required']">
+        Mật khẩu
+        <strong>không để trống</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="input-field">
+      <mat-label>Số điện thoại</mat-label>
+      <input [(ngModel)]="phoneNumber" name="phone-number" matInput required id="username" #phoneNumberNg="ngModel">
+      <mat-error *ngIf="phoneNumberNg.errors?.['required']">
+        Số điện thoại
+        <strong>không để trống</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="input-field">
+      <mat-label>Thuộc kho</mat-label>
+      <mat-select [(ngModel)]="depotId" name="depot" required #wareHouseNg ="ngModel">
+        <mat-option *ngFor="let depot of depots" [value]="depot.id">{{depot.warehouseName}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="input-field">
+      <mat-label>Chức vụ</mat-label>
+      <mat-select [(ngModel)]="roleId" name="role">
+        <mat-option *ngFor="let role of roles" [value]="role.id">{{role.roleName}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="action-form">
+    <button mat-raised-button style="margin-right: 1rem;" (click)="onBack()">Trở lại</button>
+    <button mat-raised-button color="primary" (click)="onAddEmployee()" [disabled]="!onCheckToAdd()">Lưu vào hệ
+      thống</button>
+  </div>
+</form>

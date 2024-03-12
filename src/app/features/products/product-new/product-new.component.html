@@ -1,0 +1,64 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+  <div fxFlex="95%">
+
+    <mat-card>
+      <mat-card-content>
+        <h2>Thêm mới sản phẩm</h2>
+        <form [formGroup]="productForm">
+          <mat-form-field appearance="outline" class="size-width">
+            <mat-label>Xưởng</mat-label>
+            <mat-select required formControlName="warehouseId">
+              <mat-option *ngFor="let wh of warehouse; let i=index"  [value]="wh.id">
+                {{wh.warehouseName}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="productForm.controls['warehouseId'].hasError('required')">
+              Vui lòng chọn 
+              <strong>Xưởng</strong>
+           </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="size-width">
+            <mat-label>Mã sản phẩm</mat-label>
+            <input formControlName="uuid" id="uuid" matInput placeholder="Mã sản phẩm" autocomplete="text" type="text">
+            <mat-error id="requiredEmailError" *ngIf="productForm.controls['uuid'].hasError('required')">
+              Vui lòng nhập 
+              <strong>mã sản phẩm</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="size-width">
+            <mat-label>Tên sản phẩm</mat-label>
+            <input formControlName="productName" id="productName" matInput placeholder="Tên sản phẩm" autocomplete="text" type="text">
+            <mat-error id="requiredEmailError" *ngIf="productForm.controls['productName'].hasError('required')">
+              Vui lòng nhập 
+              <strong>tên sản phẩm</strong>
+            </mat-error>
+          </mat-form-field>
+          <table class="table table-bordered" formArrayName="stages" style="width: 100%;"> 
+            <tr style="float: left;">  
+              <th colspan="2">Thêm công đoạn:</th>  
+              <th><button mat-fab type="button" (click)="addStage()" class="icon-display" color="primary"><mat-icon>add</mat-icon></button></th>  
+            </tr>
+            <tr *ngFor="let quantity of products().controls; let i=index" [formGroupName]="i">  
+              <td>  
+                Công đoạn {{(i + 1)}}: 
+                <mat-form-field appearance="outline" class="size-width">
+                  <mat-label>Công đoạn {{(i + 1)}}</mat-label>
+                  <input formControlName="stageName" id="stageName" required matInput placeholder="Vui lòng nhập..." autocomplete="text" type="text">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="size-width">
+                  <mat-label>Giá {{(i + 1)}}</mat-label>
+                  <input formControlName="cost" id="cost" required matInput placeholder="Vui lòng nhập..." autocomplete="number" type="number">
+                </mat-form-field>
+                <button (click)="removeStage(i)" class="btn btn-danger">Xóa</button>  
+              </td>
+            </tr> 
+         </table>
+        </form> 
+      </mat-card-content>
+      <button mat-flat-button color="primary" (click)="onSubmit()"  [disabled]="productForm.invalid" add>Thêm</button>
+      <button mat-flat-button color="warn" (click)="clear()">Làm mới</button>
+    </mat-card>
+  </div>
+</div>

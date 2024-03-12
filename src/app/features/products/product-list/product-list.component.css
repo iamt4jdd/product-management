@@ -1,0 +1,23 @@
+table {
+    width: 100%;
+}
+
+th.mat-sort-header-sorted {
+    color: black;
+}
+
+.red-color-completion-class {
+    color: red;
+}
+
+.green-color-completion-class {
+    color: green;
+}
+
+.blue-color-completion-class {
+    color: blue;
+}
+
+.completion_amount_input_class {
+    font-weight: bolder;
+}

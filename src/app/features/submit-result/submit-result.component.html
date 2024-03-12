@@ -1,0 +1,40 @@
+<div>
+  <div class="header-flex-customer">
+    <h2>HOÀN TẤT KHAI BÁO</h2>
+  </div>
+  
+  <table mat-table [dataSource]="reportStages" class="mat-elevation-z8">
+    <ng-container matColumnDef="productUuidCol">
+      <th mat-header-cell *matHeaderCellDef>Mã sản phẩm </th>
+      <td mat-cell *matCellDef="let element"> {{element.productUuid}} </td>
+      <td mat-footer-cell *matFooterCellDef style="font-weight: bold;"> Tổng tiền </td>
+    </ng-container>
+
+    <ng-container matColumnDef="stageNameCol">
+      <th mat-header-cell *matHeaderCellDef> Công đoạn </th>
+      <td mat-cell *matCellDef="let element"> {{element.stageName}} </td>
+      <td mat-footer-cell *matFooterCellDef style="font-weight: bold;"> Tổng tiền </td>
+    </ng-container>
+
+    <ng-container matColumnDef="amountCol">
+      <th mat-header-cell *matHeaderCellDef> Số lượng </th>
+      <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+      <td mat-footer-cell *matFooterCellDef> </td>
+    </ng-container>
+
+    <ng-container matColumnDef="costTotalCol">
+      <th mat-header-cell *matHeaderCellDef> Thành tiền </th>
+      <td mat-cell *matCellDef="let element"> {{element.costToltal}} vnđ</td>
+      <td mat-footer-cell *matFooterCellDef style="font-weight: bold;"> {{moneyFormat}} vnđ</td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
+  </table>
+<div class="button-flex-customer">
+  <button mat-raised-button color="primary" (click)="onNoClick()">Kết Thúc</button>
+</div>
+  
+</div>

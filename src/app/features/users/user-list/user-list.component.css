@@ -1,0 +1,15 @@
+table {
+    width: 100%;
+}
+
+.button-group{
+    margin-right: 0.5rem;
+}
+.title{
+    display: flex;
+    justify-content: left;
+}
+.add-button{
+    display: flex;
+    justify-content: end;
+}

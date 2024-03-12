@@ -1,0 +1,48 @@
+.employee-form{
+    width: 20%;
+}
+.stage-form{
+    width: 20%;
+}
+.amount-form{
+    margin-left: 1rem;
+    width: 20%;
+}
+.checkbox-custom{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.infor-submit{
+    background-color: rgb(245, 238, 228);
+    padding-left: 0.5rem;
+    border-radius: 0.5rem;
+}
+.report-form-detail{
+    background-color: rgb(229, 235, 241);
+    padding-left: 0.5rem;
+    border-radius: 0.5rem;
+}
+@media (min-width: 0px) and (max-width: 349px) {
+    .employee-form{
+        width: 100%;
+    }
+    .stage-form{
+        width: 100%;
+    }
+    .amount-form{
+        margin-left: 0rem;
+        width: 100%;
+    }
+  }
+@media (min-width: 350px) and (max-width: 1000px) {
+    .employee-form{
+        width: 50%;
+    }
+    .stage-form{
+        width: 39%;
+    }
+    .amount-form{
+        margin-left: 1rem;
+        width: 37%;
+    }
+}

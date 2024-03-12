@@ -1,0 +1,73 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+  <div fxFlex="95%">
+
+    <mat-card>
+      <mat-card-content>
+        <div class="title">
+          <h2>Thông tin chi tiết của {{employeeName}}</h2>
+        </div>
+        <form [formGroup]="empDetail">
+          <div fxLayout="column">
+
+            <mat-form-field class="employee-form">
+              <mat-label>Tên nhân viên</mat-label>
+              <input class="data-default" matInput formControlName="employeeName">
+            </mat-form-field>
+
+            <mat-form-field class="employee-form">
+              <mat-label>Số điện thoại</mat-label>
+              <input class="data-default" matInput formControlName="phoneNumber">
+            </mat-form-field>
+
+            <mat-form-field class="employee-form" *ngIf="!enableChane">
+              <mat-label>Chức vụ</mat-label>
+              <input class="data-default" matInput formControlName="roleName">
+            </mat-form-field>
+            
+            <mat-form-field class="employee-form" *ngIf="enableChane">
+              <mat-label>Chức vụ</mat-label>
+              <mat-select formControlName="roleId" name="role" required>
+                <mat-option *ngFor="let role of roles" [value]="role.id">{{role.roleName}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+
+            <mat-form-field class="employee-form" *ngIf="!enableChane">
+              <mat-label>Kho</mat-label>
+              <input class="data-default" matInput formControlName="warehouseName">
+            </mat-form-field>
+
+            <mat-form-field  class="employee-form" *ngIf="enableChane">
+              <mat-label>Thuộc kho</mat-label>
+              <mat-select formControlName="warehouseId" name="depot" required >
+                <mat-option *ngFor="let depot of depots" [value]="depot.id">{{depot.warehouseName}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="employee-form" *ngIf="enableChane">
+              <mat-label>Mật khẩu mới(Để trống nếu không thay đổi)</mat-label>
+              <input class="data-default" matInput formControlName="password">
+            </mat-form-field>
+
+            <button mat-icon-button style="margin-left: 3rem !important;" color="warn" (click)="onChangeStatus()"  *ngIf="!employeeEnable">
+              <mat-icon>visibility_off</mat-icon>
+              <label style="margin-left: 1rem;">Kích hoạt</label>
+            </button>
+            <button mat-icon-button  style="margin-left: 3rem !important;" color="warn" (click)="onChangeStatus()" *ngIf="employeeEnable">
+              <mat-icon>visibility</mat-icon>
+              <label style="margin-left: 1rem;">Vô hiệu hóa</label>
+            </button>
+            
+          </div>
+          <div fxLayout="row-reverse" style="margin-top: 2rem;">
+            <button mat-raised-button style="margin-right: 10rem;" color="primary" (click)="onUpdateEmp()" [disabled]="empDetail.invalid">Lưu</button>
+            <button mat-raised-button  style="margin-right: 0.5rem !important;" color="primary" (click)="onEnableChange()">Chỉnh sửa</button>
+
+          </div>
+        </form>
+        <!--form-->
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+</div>

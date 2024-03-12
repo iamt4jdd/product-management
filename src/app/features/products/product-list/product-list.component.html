@@ -1,0 +1,78 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+  <div fxFlex="95%">
+    <mat-card>
+      <mat-card-content>
+        <h2>Sản Phẩm May</h2>
+        <!-- <mat-form-field appearance="standard">
+          <mat-label>Tìm kiếm</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Search columns" #input>
+        </mat-form-field> -->
+        <button [routerLink]="['/products/new']" mat-fab color="primary"
+          style="float: right;"><mat-icon>add</mat-icon></button>
+        <table mat-table [dataSource]="dataSource">
+          <ng-container matColumnDef="uuid">
+            <th mat-header-cell *matHeaderCellDef> Mã</th>
+            <td mat-cell *matCellDef="let element"> {{element.uuid}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="productName">
+            <th mat-header-cell *matHeaderCellDef> Tên sản phẩm</th>
+            <td mat-cell *matCellDef="let element"> {{element.productName}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef> Ngày khởi tạo </th>
+            <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="amount">
+            <th mat-header-cell *matHeaderCellDef> Số lượng </th>
+            <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="completionAmount">
+            <th mat-header-cell *matHeaderCellDef>Số lượng hoàn tất</th>
+            <td mat-cell class="completion_amount_input_class" *matCellDef="let element">
+              {{element.completionAmount}} </td>
+          </ng-container>
+
+          <!-- <ng-container matColumnDef="warehouseName">
+            <th mat-header-cell *matHeaderCellDef>Kho</th>
+            <td mat-cell *matCellDef="let element">
+              {{element.warehouseName}} </td>
+          </ng-container> -->
+
+          <ng-container matColumnDef="handle">
+            <th mat-header-cell *matHeaderCellDef> Thao tác </th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-raised-button matTooltip="Chi tiết công đoạn" matTooltipPosition="above" mat-raised-button color="primary" (click)="openAddUserForm(element.id,element.amount)">
+                  <mat-icon>ballot</mat-icon>
+              </button>
+              <button mat-raised-button matTooltip="Đơn hàng" matTooltipPosition="above" style="margin-left: 0.5rem;" [routerLink]="['/orders']" [queryParams]="{productUuid: element.uuid}">
+                <mat-icon>reorder</mat-icon>
+              </button>
+              <button mat-raised-button style="margin-left: 0.5rem;" color="warn" (click)="changeStatus(element.id)">
+                <div *ngIf="element.status; else elseBlock">Vô hiệu hóa</div>
+                <ng-template #elseBlock>Kích hoạt</ng-template>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <div *ngIf="!isHasData" class="container" fxLayout="row" fxLayoutAlign="center none">
+          <div fxFlex="50%" class="text-center no-records animate">
+            <mat-icon>people_outline</mat-icon>
+            <p>Hiện tại chưa có sản phẩm.</p>
+          </div>
+        </div>
+        <mat-paginator [pageSizeOptions]="pageSizeOptions" [pageSize]="Size" (page)="pageNavigations($event)"
+          [length]="recordCount">
+        </mat-paginator>
+
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+</div>

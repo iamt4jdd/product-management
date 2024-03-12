@@ -1,0 +1,40 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+    <div fxFlex="95%">
+  
+      <mat-card>
+        <mat-card-content>
+          <h2>Thêm mới đơn hàng</h2>
+          <form [formGroup]="orderForm">
+            <mat-form-field appearance="outline" class="size-width">
+              <mat-label>Mã sản phẩm</mat-label>
+              <input formControlName="productUuid" id="productUuid" matInput placeholder="Mã sản phẩm" autocomplete="text" type="text">
+              <mat-error id="requiredEmailError" *ngIf="orderForm.controls['productUuid'].hasError('required')">
+                Vui lòng nhập 
+                <strong>mã sản phẩm</strong>
+              </mat-error>
+            </mat-form-field>
+  
+            <mat-form-field appearance="outline" class="size-width">
+              <mat-label>Mã đơn hàng</mat-label>
+              <input formControlName="uuid" id="uuid" matInput placeholder="Mã đơn hàng" autocomplete="text" type="text">
+              <mat-error id="requiredEmailError" *ngIf="orderForm.controls['uuid'].hasError('required')">
+                Vui lòng nhập 
+                <strong>mã đơn hàng</strong>
+              </mat-error>
+            </mat-form-field>
+  
+            <mat-form-field appearance="outline" class="size-width">
+              <mat-label>Số lượng</mat-label>
+              <input formControlName="amount" id="amount" matInput placeholder="Số lượng" autocomplete="text" type="number">
+              <mat-error id="requiredEmailError" *ngIf="orderForm.controls['amount'].hasError('required')">
+                Vui lòng nhập 
+                <strong>số lượng</strong>
+              </mat-error>
+            </mat-form-field>
+          </form> 
+        </mat-card-content>
+        <button mat-flat-button color="primary" (click)="onSubmit()"  [disabled]="orderForm.invalid" add>Thêm</button>
+        <button mat-flat-button color="warn" (click)="clear()">Làm mới</button>
+      </mat-card>
+    </div>
+  </div>

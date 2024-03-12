@@ -1,0 +1,40 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+    <div fxFlex="95%">
+  
+      <mat-card>
+        <mat-card-content>
+          <h2>Công đoạn</h2>
+  
+          <table mat-table [dataSource]="dataSource" matSort>
+  
+            <!-- Position Column -->
+            <ng-container matColumnDef="stageName">
+              <th mat-header-cell *matHeaderCellDef >Trạng thái</th>
+              <td mat-cell *matCellDef="let element"> {{element.stageName}} </td>
+            </ng-container>
+          
+            <!-- Name Column -->
+            <ng-container matColumnDef="cost">
+              <th mat-header-cell *matHeaderCellDef > Giá (VND)</th>
+              <td mat-cell *matCellDef="let element"> {{tranferToCurrent(element.cost)}} vnđ</td>
+            </ng-container>
+
+             <ng-container matColumnDef="completionAmount">
+              <th mat-header-cell *matHeaderCellDef style="text-align: center;">Số lượng hiện tại </th>
+              <td mat-cell *matCellDef="let element" style="text-align: center; font-weight: bolder" [ngStyle]="{'color': makeColoreForInValidStage(element.completionAmount)}"> {{element.completionAmount}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="total">
+              <th mat-header-cell *matHeaderCellDef style="text-align: center;">Tổng tiền</th>
+              <td mat-cell *matCellDef="let element" style="text-align: center; font-weight: bolder" [ngStyle]="{'color': makeColoreForInValidStage(element.completionAmount)}"> {{tranferToCurrent(element.completionAmount * element.cost)}} vnđ</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+          
+        </mat-card-content>
+      </mat-card>
+  
+    </div>
+  </div>

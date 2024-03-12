@@ -1,0 +1,96 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+  <div fxFlex="80%">
+
+    <mat-card>
+      <mat-card-content fxLayout="column">
+        <h2>Báo cáo công đoạn</h2>
+        <form [formGroup]="reportForm">
+          <div fxLayout="column" class="infor-submit">
+            <mat-form-field class="employee-form">
+              <mat-label>Tên nhân viên</mat-label>
+              <mat-select id="employeeId" formControlName="employeeId">
+                <mat-option *ngFor="let emp of employeelist" [value]="emp.id">{{emp.employeeName}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="employee-form">
+              <mat-label>Mật khẩu</mat-label>
+              <input matInput formControlName="password" id="password" type="password" required maxlength="50">
+            </mat-form-field>
+          </div>
+          <br><br>
+
+
+          <!--new form-->
+          <table class="table table-bordered" formArrayName="reportsFull" style="width: 100%;">
+            <tr *ngFor="let quantity of getReportsList().controls; let i=index" [formGroupName]="i">
+              <td class="report-form-detail" >
+                <div fxLayout="column">
+                  <div fxLayout="row wrap">
+                    <mat-form-field class="employee-form">
+                      <mat-label>Mã sản phẩm</mat-label>
+                      <mat-select id="productId" formControlName="productId" (selectionChange)="updateState($event,i)">
+                        <mat-option *ngFor="let product of products" [value]="product.id">{{product.uuid}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  
+                    <button mat-icon-button color="accent" aria-label="Example icon button with a delete icon"(click)="removeReport(i)">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </div>
+
+                  <mat-form-field class="employee-form">
+                    <mat-label>Mã đơn hàng</mat-label>
+                    <mat-select id="orderId" formControlName="orderId">
+                      <mat-option *ngFor="let order of orderCollection[i]" [value]="order.id">{{order.uuid}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <button mat-raised-button color="green" style="max-width: 150px; margin-bottom: 1rem;" (click)="addStageReportElement(i)">
+                    Thêm công đoạn</button>
+                </div>
+
+
+                <table class="table table-bordered" formArrayName="stageReports" style="width: 100%;">
+                  <tr *ngFor="let stageReports of getStageList(i).controls; let y=index" [formGroupName]="y">
+                    <td>
+                      <div fxLayout="row wrap">
+                        <mat-form-field class="stage-form">
+                          <mat-label>Công đoạn</mat-label>
+                          <mat-select id="stageId" formControlName="stageId">
+                            <mat-option *ngFor="let stage of stagesCollection[i]" [value]="stage.id">{{stage.stageName}}</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field class="amount-form">
+                          <mat-label>Số lượng</mat-label>
+                          <input matInput formControlName="amount" id="amount" required maxlength="10"
+                            placeholder="ví dụ: 10">
+                        </mat-form-field>
+
+                        <button mat-icon-button color="accent" aria-label="Example icon button with a delete icon"
+                          (click)="removeStageReport(i,y)">
+                          <mat-icon>delete</mat-icon>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+                <mat-divider style="margin-top: 1rem;"></mat-divider>
+                <mat-divider ></mat-divider>
+                <mat-divider ></mat-divider>
+              </td>
+            </tr>
+          </table>
+          <mat-checkbox class="checkbox-custom" formControlName="checked">Vui lòng kiểm tra lại và đánh dấu.</mat-checkbox>
+        </form>
+
+        <div fxLayout="row wrap">
+          <button mat-raised-button color="primary" (click)="addReport()">Thêm đơn báo cáo</button>
+          <button style="margin-left: 0.5rem;" mat-raised-button color="primary" (click)="onReportSubmit()"
+            [disabled]="reportForm.invalid">Gửi báo
+            cáo</button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+</div>

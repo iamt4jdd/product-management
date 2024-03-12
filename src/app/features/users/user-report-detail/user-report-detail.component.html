@@ -1,0 +1,102 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+  <div fxFlex="95%">
+
+    <mat-card>
+      <mat-card-content>
+        <div class="title">
+          <h2>Báo cáo chi tiết của {{employeeName}}</h2>
+        </div>
+        <form [formGroup]="timeForm" fxLayout="row" style="margin-top: 2rem; margin-bottom: 2rem;">
+          <mat-form-field style="margin-left: 2rem;">
+            <mat-label>Ngày bắt đầu</mat-label>
+            <input matInput [matDatepicker]="dp1" formControlName="dateStart">
+            <mat-hint>ngày/tháng/năm</mat-hint>
+            <mat-datepicker #dp1></mat-datepicker>
+          </mat-form-field>
+          <mat-datepicker-toggle matIconSuffix [for]="dp1"></mat-datepicker-toggle>
+
+          <mat-form-field style="margin-left: 2rem;">
+            <mat-label>Ngày kết thúc</mat-label>
+            <input matInput [matDatepicker]="dp2" formControlName="dateEnd">
+            <mat-hint>ngày/tháng/năm</mat-hint>
+            <mat-datepicker #dp2></mat-datepicker>
+          </mat-form-field>
+          <mat-datepicker-toggle matIconSuffix [for]="dp2"></mat-datepicker-toggle>
+
+          <button mat-raised-button color="primary" class="button-filter" (click)="filterReport()">Lọc kết quả</button>
+        </form>
+
+        <!--if data exists-->
+        <table *ngIf="isHasData" mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Số thứ tự </th>
+            <td mat-cell *matCellDef="let element;let i = index;"> {{i + 1}} </td>
+            <td mat-footer-cell *matFooterCellDef style="font-weight: bold;"> Tổng tiền </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="productName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Tên sản phẩm </th>
+            <td mat-cell *matCellDef="let element"> {{element.productName}} </td>
+            <td mat-footer-cell *matFooterCellDef> </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="stageName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Tên công đoạn </th>
+            <td mat-cell *matCellDef="let element"> {{element.stageName}} </td>
+            <td mat-footer-cell *matFooterCellDef> </td>
+          </ng-container>
+
+          <ng-container matColumnDef="amount">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Số lượng </th>
+            <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+            <td mat-footer-cell *matFooterCellDef> </td>
+          </ng-container>
+
+          <ng-container matColumnDef="money">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Thành tiền </th>
+            <td mat-cell *matCellDef="let element"> {{element.money}} vnđ</td>
+            <td mat-footer-cell *matFooterCellDef> </td>
+          </ng-container>
+
+          <ng-container matColumnDef="dateSubmit">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Ngày báo cáo </th>
+            <td mat-cell *matCellDef="let element"> {{element.dateSubmit}} </td>
+            <td mat-footer-cell *matFooterCellDef style="font-weight: bold;">{{empReportDetail.moneyTotal}} vnđ</td>
+          </ng-container>
+
+          <ng-container matColumnDef="action" layout-align="start center">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Chỉnh sửa </th>
+            <td mat-cell *matCellDef="let element" >
+              <mat-form-field class="example-full-width">
+                <mat-label>Số mới</mat-label>
+                <input matInput id="{{element.id}}">
+              </mat-form-field>
+              <button mat-raised-button color="primary" class="button-filter" (click)="updateAmount(element.id)">Lưu lại</button>
+              <button mat-raised-button color="warn" class="button-filter" (click)="deleteReport(element.id)">Xóa</button>
+            </td>
+            <td mat-footer-cell *matFooterCellDef> </td>
+          </ng-container>
+
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
+        </table>
+        <!--if data is null-->
+        <div *ngIf="!isHasData" class="container" fxLayout="row" fxLayoutAlign="center none">
+          <div fxFlex="50%" class="text-center no-records animate">
+            <mat-icon>perm_contact_calendar</mat-icon>
+            <p>Chưa có báo cáo của {{employeeName}} trong thời gian này.</p>
+          </div>
+        </div>
+
+        <!-- <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar> -->
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+</div>

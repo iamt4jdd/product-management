@@ -1,0 +1,36 @@
+table {
+    width: 100%;
+}
+.employee-form{
+    width: 25%;
+    margin-left: 3rem;
+}
+.data-default{
+    color: black;
+}
+@media (min-width: 0px) and (max-width: 349px) {
+    .employee-form{
+        width: 100%;
+        margin-left: 1rem;
+    }
+    .stage-form{
+        width: 100%;
+    }
+    .amount-form{
+        margin-left: 0rem;
+        width: 100%;
+    }
+  }
+@media (min-width: 350px) and (max-width: 1000px) {
+    .employee-form{
+        width: 50%;
+        margin-left: 1rem;
+    }
+    .stage-form{
+        width: 39%;
+    }
+    .amount-form{
+        margin-left: 1rem;
+        width: 39%;
+    }
+}

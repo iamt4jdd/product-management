@@ -1,0 +1,54 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+  <div fxFlex="95%">
+    <mat-card>
+      <mat-card-content>
+        <h2>Đơn hàng</h2>
+        <!-- <button [routerLink]="['/orders/new']" mat-fab color="primary"
+          style="float: right;"><mat-icon>add</mat-icon>
+        </button> -->
+        <table mat-table [dataSource]="dataSource">
+          <ng-container matColumnDef="uuid">
+            <th mat-header-cell *matHeaderCellDef>Mã đơn hàng</th>
+            <td mat-cell *matCellDef="let element"> {{element.uuid}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="amount">
+            <th mat-header-cell *matHeaderCellDef> Số lượng </th>
+            <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="productUuid">
+            <th mat-header-cell *matHeaderCellDef> Mã sản phẩm </th>
+            <td mat-cell *matCellDef="let element"> {{element.productUuid}} </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef> Ngày giao hàng </th>
+            <td mat-cell *matCellDef="let element"> {{element.orderDate}} </td>
+          </ng-container>
+
+          <!-- <ng-container matColumnDef="completionAmount">
+            <th mat-header-cell *matHeaderCellDef>Số lượng hoàn tất</th>
+            <td mat-cell class="completion_amount_input_class" *matCellDef="let element">
+              {{element.completionAmount}} </td>
+          </ng-container> -->
+          
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <div *ngIf="!isHasData" class="container" fxLayout="row" fxLayoutAlign="center none">
+          <div fxFlex="50%" class="text-center no-records animate">
+            <mat-icon>people_outline</mat-icon>
+            <p>Mã sản phẩm chưa có đơn hàng nào.</p>
+          </div>
+        </div>
+        <mat-paginator [pageSizeOptions]="pageSizeOptions" [pageSize]="Size" (page)="pageNavigations($event)"
+        [length]="recordCount">
+      </mat-paginator>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+</div>

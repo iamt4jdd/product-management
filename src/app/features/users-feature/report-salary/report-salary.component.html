@@ -1,0 +1,42 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+    <div fxFlex="95%">
+
+        <mat-card>
+            <mat-card-content>
+                <div class="title">
+                    <h2>Thông tin chi tiết thu nhập</h2>
+                </div>
+
+                <form [formGroup]="timeForm" fxLayout="column">
+                    <div fxLayout="row" style="margin-top: 2rem; margin-bottom: 2rem;">
+                        <mat-form-field style="margin-left: 2rem;">
+                            <mat-label>Ngày bắt đầu</mat-label>
+                            <input matInput [matDatepicker]="dp1" formControlName="dateStart">
+                            <mat-hint>ngày/tháng/năm</mat-hint>
+                            <mat-datepicker #dp1></mat-datepicker>
+                        </mat-form-field>
+                        <mat-datepicker-toggle matIconSuffix [for]="dp1"></mat-datepicker-toggle>
+    
+                        <mat-form-field style="margin-left: 2rem;">
+                            <mat-label>Ngày kết thúc</mat-label>
+                            <input matInput [matDatepicker]="dp2" formControlName="dateEnd">
+                            <mat-hint>ngày/tháng/năm</mat-hint>
+                            <mat-datepicker #dp2></mat-datepicker>
+                        </mat-form-field>
+                        <mat-datepicker-toggle matIconSuffix [for]="dp2"></mat-datepicker-toggle>
+    
+                        <button mat-raised-button color="primary" class="button-filter" (click)="filterReport()">Lọc kết
+                            quả</button>
+                    </div>
+                    <div fxLayout="column">
+                            <label >{{employeeName}}</label>
+                            <label >{{phoneNumber}}</label>
+                            <label >{{amount}}</label>
+                    </div>
+                        
+                </form>
+
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

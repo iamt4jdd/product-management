@@ -1,0 +1,12 @@
+table {
+    width: 100%;
+}
+.header-flex-customer{
+    display: flex;
+    justify-content: center;
+}
+.button-flex-customer{
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+}

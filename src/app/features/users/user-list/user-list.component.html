@@ -1,0 +1,99 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+  <div fxFlex="95%">
+
+    <mat-card>
+      <mat-card-content>
+        <div class="title">
+          <h2>Danh sách nhân viên</h2>
+        </div>
+        <div class="add-button">
+          <button mat-raised-button class="add-button" (click)="openAddUserForm()">+ Thêm nhân viên</button>
+        </div>
+        <!--if data exists-->
+        <table *ngIf="isHasData" mat-table [dataSource]="dataSource" matSort>
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Số thứ tự </th>
+            <td mat-cell *matCellDef="let element;let i = index;"> {{i+1}} </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="employeeName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Tên </th>
+            <td mat-cell *matCellDef="let element"> {{element.employeeName}} </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="roleName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Chức vụ </th>
+            <td mat-cell *matCellDef="let element"> 
+              <div *ngIf="isAdmin(element.roleName); else elseBlock">Quản trị viên</div>
+              <ng-template #elseBlock>Nhân viên</ng-template>
+            </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="phoneNumber">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Số điện thoại </th>
+            <td mat-cell *matCellDef="let element"> {{element.phoneNumber}} </td>
+          </ng-container>
+
+          <!-- warehouseName Column -->
+          <ng-container matColumnDef="warehouseName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Thuộc kho </th>
+            <td mat-cell *matCellDef="let element">
+              <div *ngIf="element.warehouseName === null; else elseBlock">Trống</div>
+              <ng-template #elseBlock>{{element.warehouseName}}</ng-template>
+            </td>
+          </ng-container>
+
+          <!-- active Column -->
+          <ng-container matColumnDef="activeFlag">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Trạng thái </th>
+            <td mat-cell *matCellDef="let element">
+              <div *ngIf="element.activeFlag; else elseBlock">Đang hoạt động</div>
+              <ng-template #elseBlock>Đã vô hiệu hóa</ng-template>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="handle">
+            <th mat-header-cell *matHeaderCellDef> Thao tác </th>
+            <td mat-cell *matCellDef="let row">
+              
+
+              <button mat-icon-button color="primary" class="button-group" matTooltip="Thông tin chi tiết" matTooltipPosition="above" (click)="onEmpDetail(row.id,row.employeeName)">
+                <mat-icon >folder_shared</mat-icon>
+                </button>
+
+              <button mat-icon-button color="primary" class="button-group" matTooltip="Thông tin báo cáo" matTooltipPosition="above" (click)="onEmpReportDetail(row.id,row.employeeName)">
+              <mat-icon >ballot</mat-icon>
+              </button>
+              
+              <button mat-icon-button color="warn" (click)="changeStatus(row.id)" *ngIf="row.activeFlag">
+                <mat-icon>visibility</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" (click)="changeStatus(row.id)" *ngIf="!row.activeFlag">
+                <mat-icon>visibility_off</mat-icon>
+              </button>
+
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <!--if data is null-->
+        <div *ngIf="!isHasData" class="container" fxLayout="row" fxLayoutAlign="center none">
+          <div fxFlex="50%" class="text-center no-records animate">
+            <mat-icon>people_outline</mat-icon>
+            <p>Hiện tại chưa có nhân viên.</p>
+          </div>
+        </div>
+
+        <!-- <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar> -->
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+</div>
